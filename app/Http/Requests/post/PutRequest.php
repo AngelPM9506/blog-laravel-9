@@ -11,7 +11,7 @@ class PutRequest extends FormRequest
     {
         return [
             'category_id' => 'required|integer',
-            'title' => 'required|unique:posts|string',
+            'title' => 'required|string',
             'description' => 'required|string',
             'content' => 'required|string',
             'posted' => 'required|boolean'

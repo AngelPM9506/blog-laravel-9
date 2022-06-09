@@ -18,9 +18,9 @@
                         <th>{{ $post->category_id }}</th>
                         <th>{{ $post->posted ? 'Si' : 'No' }}</th>
                         <th class="acciones">
-                            <a class="btn btn-outline-success" href="{{route('post.show', $post->id)}}">Ver</a>
-                            <a class="btn btn-outline-warning" href="{{route('post.edit', $post->id)}}">Editar</a>
-                            <form action="{{route('post.destroy', $post->id)}}" method="POST">
+                            <a class="btn btn-outline-success" href="{{ route('post.show', $post->id) }}">Ver</a>
+                            <a class="btn btn-outline-warning" href="{{ route('post.edit', $post->id) }}">Editar</a>
+                            <form action="{{ route('post.destroy', $post->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <input type="submit" value="Eliminar" class="btn btn-outline-danger">

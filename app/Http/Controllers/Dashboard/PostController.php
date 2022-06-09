@@ -25,8 +25,8 @@ class PostController extends Controller
     public function index()
     {
         $titulo = 'Blog';
-        $categories = Category::pluck('id','title');
-        $posts = Post::paginate(10); 
+        $categories = Category::pluck('title');
+        $posts = Post::paginate(10);
         return view('dashboard.post.index', compact('titulo', 'categories', 'posts'));
     }
 
@@ -38,7 +38,7 @@ class PostController extends Controller
     public function create()
     {
         $titulo = "Crear post Nuevo";
-        $categories = Category::pluck('id','title');
+        $categories = Category::pluck('id', 'title');
         $post = new Post();
         return view('dashboard.post.create', compact('titulo', 'categories', 'post'));
     }
@@ -55,7 +55,8 @@ class PostController extends Controller
         $data = array_map('trim', $data);
         $post = new Post($data);
         $post->save();
-        dd($data);
+        //return redirect()->route('post.show', $post->id);
+        return to_route('post.show', $post->id);
     }
 
     /**
@@ -68,7 +69,7 @@ class PostController extends Controller
     {
         $titulo = $post->title;
         $categories = Category::pluck('title');
-        return view('dashboard.post.show', compact('titulo','post', 'categories'));
+        return view('dashboard.post.show', compact('titulo', 'post', 'categories'));
     }
 
     /**
@@ -79,7 +80,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $titulo = "Edita la entrada: ".$post->title;
+        $titulo = "Edita la entrada: " . $post->title;
         $categories = Category::pluck('id', 'title');
         return view('dashboard.post.edit', compact('post', 'titulo', 'categories'));
     }
@@ -94,6 +95,8 @@ class PostController extends Controller
     public function update(PutRequest $request, Post $post)
     {
         $post->update($request->validated());
+        //return redirect()->route('post.show', $post->id);
+        return to_route('post.show', $post->id);
     }
 
     /**
@@ -104,13 +107,19 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        self::debuguear($post);
+        $post->delete();
+        /**
+         * Se puede agregar una vista de la confirmacion del borrado 
+         * o simplemente retornarnar al index con con un mensaje o no
+         */
+        return to_route('post.index');
     }
-    protected 
-    function debuguear($debug){
-        echo"<pre>";
+    protected
+    function debuguear($debug)
+    {
+        echo "<pre>";
         var_dump($debug);
-        echo"</pre>";
+        echo "</pre>";
         exit;
     }
 }

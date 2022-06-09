@@ -1,26 +1,26 @@
-@use '../base/variables' as v;
-@use '../base/mixins' as m;
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
 
-.formulario{
+.formulario {
     border: 1px solid v.$gris;
     border-radius: 0.4rem;
     background-color: v.$grisClaro;
     padding: 0.8rem;
-    .campos-tex{
-        @include m.tablet{
+    .campos-tex {
+        @include m.tablet {
             @include m.grid(2, 1rem);
         }
     }
-    .campo{
+    .campo {
         position: relative;
         margin: 0.4rem;
         padding: 0.4rem;
         display: flex;
         align-items: center;
-        label{
+        label {
             text-align: center;
             flex: 0 0 2.5rem;
-            @include m.tablet{
+            @include m.tablet {
                 text-align: right;
                 margin-right: 0.4rem;
                 flex: 0 0 1.8rem;
@@ -28,38 +28,37 @@
         }
         input:not([type="submit"]),
         select,
-        textarea{
+        textarea {
             flex: 1;
             padding: 0.4rem;
             border: none;
             border-radius: 0.4rem;
             background-color: lighten(v.$gris, 30%);
         }
-        option{
+        option {
             text-align: center;
         }
-        &.textarea{
-            height: 10rem;
+        &.textarea {
+            height: auto;
             flex-direction: column;
-            label{
+            label {
                 flex: 0 0 1.2rem;
             }
-            textarea{
+            textarea {
                 height: 5rem;
                 width: 100%;
             }
         }
-        input[type="submit"]{
+        input[type="submit"] {
             @include m.boton(v.$navy, v.$blanco);
-            @include m.tablet{
+            @include m.tablet {
                 position: absolute;
                 margin: 0.8rem;
                 right: 0;
             }
         }
-        &.submit{
+        &.submit {
             height: 3.5rem;
         }
     }
-
 }
