@@ -1,0 +1,20 @@
+@use '../base/mixins' as m;
+.alertas{
+    padding: 0.8rem;
+    @include m.tablet{
+        @include m.grid(3, 1rem);
+    }
+    .alert{
+        padding: 0.5rem;
+        @include m.tablet{
+            margin: 0;
+        }
+        p{
+            text-align: center;
+            margin: 0;
+            padding: 0.2rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+    }
+}

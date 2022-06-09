@@ -1,0 +1,50 @@
+@use 'variables' as v;
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+html {
+    //font-size: 62.5%;
+    box-sizing: border-box;
+    //background-color: v.$gris;
+    //height: 100%;
+}
+body {
+    //position: relative;
+    font-family: v.$fuente_textos;
+    //font-size: 1.6rem;
+    //min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+main{
+    height: 100%;
+    max-height: auto !important;
+    padding: 1rem;
+}
+section{
+    height: 100%;
+    margin: 0.8rem;
+    padding: 0.4rem;
+}
+.contenedor {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.contenedor-sm {
+    max-width: 70rem;
+    margin: 0 auto;
+}
+.hoja-titulo{
+    font-size: 3rem;
+    text-align: center;
+    padding: 0.4rem;
+    margin: 0.8rem;
+}
+a {
+    text-decoration: none;
+}
+img {
+    max-width: 100%;
+}

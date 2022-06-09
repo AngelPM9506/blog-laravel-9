@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\PostController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/',function () {
+    $categories = Category::pluck('title');
+    $titulo = "Blog laravel 9";
+    return view('dashboard.index',compact('categories', 'titulo'));
 });
+Route::resource('post', PostController::class);
+//Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
