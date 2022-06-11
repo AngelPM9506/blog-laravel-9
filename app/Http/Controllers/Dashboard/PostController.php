@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\post\PutRequest;
 use App\Http\Requests\post\StoreRequest;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use phpDocumentor\Reflection\Types\Self_;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -56,7 +58,7 @@ class PostController extends Controller
         $post = new Post($data);
         $post->save();
         //return redirect()->route('post.show', $post->id);
-        return to_route('post.show', $post->id);
+        return to_route('post.show', $post->id)->with('status', 'Creado correctamente');
     }
 
     /**
@@ -69,6 +71,7 @@ class PostController extends Controller
     {
         $titulo = $post->title;
         $categories = Category::pluck('title');
+        //$post->load('category');
         return view('dashboard.post.show', compact('titulo', 'post', 'categories'));
     }
 
@@ -94,9 +97,21 @@ class PostController extends Controller
      */
     public function update(PutRequest $request, Post $post)
     {
-        $post->update($request->validated());
+        $last_image = $post->image ?? '';
+        $data = $request->validated();
+        if (isset($data['image'])) {
+            $filename = md5(uniqid(rand(), true)) . '.' . $data['image']->extension();
+            $image = $request->file('image');
+            if (Storage::disk('image_post')->put($filename, File::get($image))) {
+                $data['image'] = $filename;
+                if (Storage::disk('image_post')->exists($last_image)) {
+                    Storage::disk('image_post')->delete($last_image);
+                }
+            }
+        }
+        $post->update($data);
         //return redirect()->route('post.show', $post->id);
-        return to_route('post.show', $post->id);
+        return to_route('post.show', $post->id)->with('status', 'Actualizado correctamente');
     }
 
     /**
@@ -107,12 +122,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $last_post = $post->title;
         $post->delete();
         /**
          * Se puede agregar una vista de la confirmacion del borrado 
          * o simplemente retornarnar al index con con un mensaje o no
          */
-        return to_route('post.index');
+        return to_route('post.index')->with('status', $last_post . ': Borrado correctamente');
     }
     protected
     function debuguear($debug)

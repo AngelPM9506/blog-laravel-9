@@ -2,6 +2,11 @@
 @section('content')
     <h2 class="hoja-titulo">Index post</h2>
     <section>
+        @if (session('status'))
+            <div class="alert alert-danger text-center" role="alert">
+                {{ session('status') }}
+            </div>
+        @endif
         <table class="table align-middle">
             <thead>
                 <tr>
@@ -15,7 +20,7 @@
                 @foreach ($posts as $post)
                     <tr>
                         <th>{{ $post->title }}</th>
-                        <th>{{ $post->category_id }}</th>
+                        <th>{{ $post->category->title }}</th>
                         <th>{{ $post->posted ? 'Si' : 'No' }}</th>
                         <th class="acciones">
                             <a class="btn btn-outline-success" href="{{ route('post.show', $post->id) }}">Ver</a>

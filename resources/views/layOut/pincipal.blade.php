@@ -54,7 +54,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ $titulo }}
+                                Opciones
                             </a>
                             <ul class="dropdown-menu text-center" style="background-color:  #e8ebff ;"
                                 aria-labelledby="navbarScrollingDropdown">
