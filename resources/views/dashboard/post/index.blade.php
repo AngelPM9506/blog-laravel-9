@@ -20,7 +20,7 @@
                 @foreach ($posts as $post)
                     <tr>
                         <th>{{ $post->title }}</th>
-                        <th>{{ $post->category->title }}</th>
+                        <th>{{ $post->category === null ? 'Sin categoria' : $post->category->title }}</th>
                         <th>{{ $post->posted ? 'Si' : 'No' }}</th>
                         <th class="acciones">
                             <a class="btn btn-outline-success" href="{{ route('post.show', $post->id) }}">Ver</a>
@@ -35,7 +35,10 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="d-flex justify-content-end">
+        <div class="d-grid gap-5 d-flex justify-content-end">
+            <div>
+                <a href="{{ route('post.create') }}" class="btn btn-outline-success">Entrada nueva</a>
+            </div>
             {{ $posts->links() }}
         </div>
     </section>

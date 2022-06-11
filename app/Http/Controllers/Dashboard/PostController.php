@@ -28,7 +28,7 @@ class PostController extends Controller
     {
         $titulo = 'Blog';
         $categories = Category::pluck('title');
-        $posts = Post::paginate(10);
+        $posts = Post::paginate(4);
         return view('dashboard.post.index', compact('titulo', 'categories', 'posts'));
     }
 

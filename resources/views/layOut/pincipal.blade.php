@@ -58,8 +58,10 @@
                             </a>
                             <ul class="dropdown-menu text-center" style="background-color:  #e8ebff ;"
                                 aria-labelledby="navbarScrollingDropdown">
-                                <li><a class="dropdown-item" href="{{route('post.index')}}">Blog</a></li>
+                                <li><a class="dropdown-item" href="{{route('post.index')}}">Entradas</a></li>
                                 <li><a class="dropdown-item" href="{{route('post.create')}}">Crear entrada</a></li>
+                                <li><a class="dropdown-item" href="{{route('category.index')}}">Categorias</a></li>
+                                <li><a href="{{route('category.create')}}" class="dropdown-item">Crear Categoria</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
