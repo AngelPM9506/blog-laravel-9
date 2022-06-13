@@ -23,6 +23,26 @@ Route::get('/', function () {
 });
 Route::resource('post', PostController::class);
 Route::resource('category', CategoryController::class);
-//Auth::routes();
+/*
+ * Agrupacion de rutas
+ *  Route::controller(PostController::class)->group(() => {
+ *      Route::get('post', 'index')->name("post.index");
+ *                  Ruta    metodo
+ * });
+ * Agrupaciones para prefijos
+ * Route::group(['prefix' => 'admin'], function () {
+    Route::get('users', function ()    {
+        // Matches The "/admin/users" URL
+    });
+});
+De esta forma es como agregar un prefijo para cada ruta que se declare dentro del grupo
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Se pueden agrupar los recursos o las rutas resourses de la siguiente forma
+Route::resources([
+    'photos' => PhotoController::class,
+    'posts' => PostController::class,
+]);
+para organizar las rutas de los recursos
+ */
+//Auth::routes();
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
