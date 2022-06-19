@@ -43,10 +43,10 @@
                     <ul class="navbar-nav navbar-right my-2 my-lg-0 navbar-nav-scroll"
                         style="--bs-scroll-height: 100px;" *ngIf="!identity">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" [routerLink]="'/login'">logIn</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('login') }}">logIn</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" [routerLink]="'/registro'">Registro</a>
+                            <a class="nav-link" href="{{ route('register') }}">Registro</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav navbar-right my-2 my-lg-0 navbar-nav-scroll"
@@ -58,10 +58,12 @@
                             </a>
                             <ul class="dropdown-menu text-center" style="background-color:  #e8ebff ;"
                                 aria-labelledby="navbarScrollingDropdown">
-                                <li><a class="dropdown-item" href="{{route('post.index')}}">Entradas</a></li>
-                                <li><a class="dropdown-item" href="{{route('post.create')}}">Crear entrada</a></li>
-                                <li><a class="dropdown-item" href="{{route('category.index')}}">Categorias</a></li>
-                                <li><a href="{{route('category.create')}}" class="dropdown-item">Crear Categoria</a></li>
+                                <li><a class="dropdown-item" href="{{ route('post.index') }}">Entradas</a></li>
+                                <li><a class="dropdown-item" href="{{ route('post.create') }}">Crear entrada</a></li>
+                                <li><a class="dropdown-item" href="{{ route('category.index') }}">Categorias</a></li>
+                                <li><a href="{{ route('category.create') }}" class="dropdown-item">Crear
+                                        Categoria</a>
+                                </li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -70,7 +72,12 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" [routerLink]="'/logout/1'">Cerrar sesión</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <input type="submit" value="Cerrar sesion">
+                                    </form>
+                                </li>
                             </ul>
                         </li>
                         <li class="avatar">
@@ -83,7 +90,7 @@
         <!--cierre barra de navegacion-->
     </header>
     <!--cierre de contenedor-->
-    <main class="container min-vh-100 ">
+    <main class="container min-vh-100">
         @yield('content')
     </main>
     <footer class="footer">

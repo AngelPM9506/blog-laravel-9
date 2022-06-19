@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Dashboard\CategoryController;
-use App\Http\Controllers\Dashboard\PostController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\PostController;
+use App\Http\Controllers\Dashboard\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,36 +13,36 @@ use Illuminate\Support\Facades\Route;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
+
+    Route::get('/', function () {
+        $titulo = 'Categorias';
+        $categories = Category::pluck('title');
+        return view('dashboard.index', compact('titulo', 'categories'));
+    })->name('dashboard');
 |
 */
 
 Route::get('/', function () {
+    $titulo = 'Categorias';
     $categories = Category::pluck('title');
-    $titulo = "Blog laravel 9";
-    return view('dashboard.index', compact('categories', 'titulo'));
-});
-Route::resource('post', PostController::class);
-Route::resource('category', CategoryController::class);
-/*
- * Agrupacion de rutas
- *  Route::controller(PostController::class)->group(() => {
- *      Route::get('post', 'index')->name("post.index");
- *                  Ruta    metodo
- * });
- * Agrupaciones para prefijos
- * Route::group(['prefix' => 'admin'], function () {
-    Route::get('users', function ()    {
-        // Matches The "/admin/users" URL
-    });
-});
-De esta forma es como agregar un prefijo para cada ruta que se declare dentro del grupo
+    return view('dashboard.index', compact('titulo', 'categories'));
+})->name('dashboard');
 
-Se pueden agrupar los recursos o las rutas resourses de la siguiente forma
-Route::resources([
-    'photos' => PhotoController::class,
-    'posts' => PostController::class,
-]);
-para organizar las rutas de los recursos
- */
-//Auth::routes();
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/*Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');*/
+
+Route::group([
+    'prefix' => 'dashboard',
+    'middleware' => 'auth'
+], function () {
+    Route::resources([
+        'post' => PostController::class,
+        'category' => CategoryController::class,
+    ]);
+});
+
+/*Route::resource('post', PostController::class);
+Route::resource('category', CategoryController::class);*/
+
+require __DIR__ . '/auth.php';

@@ -1,4 +1,7 @@
-require('./bootstrap');
-require('./jquery');
-require('froala-editor')
-require('./scripsFun');
+import './bootstrap';
+
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();

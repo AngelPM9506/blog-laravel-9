@@ -95,7 +95,6 @@
   background-clip: padding-box;
   height: 40px;
   width: 40px;
-  text-align: center;
   background: #FFF;
   color: #333333;
   -webkit-transition: background 0.2s ease 0s, color 0.2s ease 0s, transform 0.2s ease 0s;
@@ -660,7 +659,6 @@ iframe.fr-iframe {
   -moz-transition: height 0.3s;
   -ms-transition: height 0.3s;
   -o-transition: height 0.3s;
-  margin-top: 0;
   float: left;
   height: 0;
   margin-top: 0 !important;
@@ -792,7 +790,6 @@ body.fr-prevent-scroll.fr-mobile {
   -webkit-border-radius: 10px;
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   background-clip: padding-box;
   margin: 20px auto;
   display: inline-block;
@@ -1391,10 +1388,6 @@ ol.decimal_type > li:before {
   clear: both;
   display: block;
   content: "";
-  height: 0;
-}
-
-.fr-toolbar::after {
   height: 0;
 }
 
@@ -5560,8 +5553,6 @@ textarea.form-control-lg {
   margin-left: 0.255em;
   vertical-align: 0.255em;
   content: "";
-}
-.dropstart .dropdown-toggle::after {
   display: none;
 }
 .dropstart .dropdown-toggle::before {
@@ -13264,14 +13255,14 @@ p {
 
 .formulario .campo label {
   text-align: center;
-  flex: 0 0 2.5rem;
+  flex: 0 0 2rem;
 }
 
 @media (min-width: 768px) {
   .formulario .campo label {
     text-align: right;
     margin-right: 0.4rem;
-    flex: 0 0 1.8rem;
+    flex: 0 0 5rem;
   }
 }
 .formulario .campo input:not([type=submit]),
@@ -13328,17 +13319,98 @@ p {
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
-  .formulario .campo input[type=submit] {
-    position: absolute;
-    margin: 0.8rem;
-    right: 0;
-  }
-}
 .formulario .campo.submit {
-  height: 3.5rem;
+  min-height: auto;
 }
 
+.formulario.login, .formulario.regis {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario.login .campo, .formulario.regis .campo {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .formulario.login .campo, .formulario.regis .campo {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .formulario.login .campo label, .formulario.regis .campo label {
+    text-align: left;
+    width: 15%;
+  }
+}
+.formulario.login .campo input:not([type=submit]), .formulario.regis .campo input:not([type=submit]) {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .formulario.login .campo input:not([type=submit]), .formulario.regis .campo input:not([type=submit]) {
+    width: 90%;
+  }
+}
+.formulario.login .campo input[type=submit], .formulario.regis .campo input[type=submit] {
+  background-color: #000080;
+  padding: 0.7rem 1.6rem;
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  border-radius: 0.4rem;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .formulario.login .campo input[type=submit], .formulario.regis .campo input[type=submit] {
+    width: auto;
+  }
+}
+.formulario.login .campo input[type=submit]:hover, .formulario.regis .campo input[type=submit]:hover {
+  background-color: #00004d;
+  cursor: pointer;
+}
+
+.formulario.login .campo.remember, .formulario.regis .campo.remember {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.formulario.login .campo.remember label, .formulario.regis .campo.remember label {
+  min-width: 100%;
+  text-align: right;
+  margin: 0 auto;
+  width: auto;
+}
+
+.formulario.login .campo.remember label input, .formulario.regis .campo.remember label input {
+  margin: 0.2rem;
+  padding: 0.2rem;
+  height: 1rem;
+  width: 1rem;
+}
+
+.formulario.login .campo.submit a, .formulario.regis .campo.submit a {
+  text-align: center;
+  margin: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .formulario.login .campo.submit, .formulario.regis .campo.submit {
+    justify-content: space-between;
+    align-items: center;
+  }
+}
 .footer {
   background-color: #252850;
   margin-top: 0.8rem;

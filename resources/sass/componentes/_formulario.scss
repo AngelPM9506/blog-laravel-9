@@ -19,11 +19,11 @@
         align-items: center;
         label {
             text-align: center;
-            flex: 0 0 2.5rem;
+            flex: 0 0 2rem;
             @include m.tablet {
                 text-align: right;
                 margin-right: 0.4rem;
-                flex: 0 0 1.8rem;
+                flex: 0 0 5rem;
             }
         }
         input:not([type="submit"]),
@@ -51,14 +51,63 @@
         }
         input[type="submit"] {
             @include m.boton(v.$navy, v.$blanco);
-            @include m.tablet {
-                position: absolute;
-                margin: 0.8rem;
-                right: 0;
-            }
         }
         &.submit {
-            height: 3.5rem;
+            min-height: auto;
+        }
+    }
+    &.login,
+    &.regis{
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        .campo{
+            display: flex;
+            flex-direction: column;
+            @include m.tablet{
+                flex-direction: row;
+                gap: 0.5rem;
+                label{
+                    text-align: left;
+                    width: 15%;
+                }
+            }
+            input:not([type="submit"]){
+                width: 100%;
+                @include m.tablet{
+                    width: 90%;
+                }
+            }
+            input[type="submit"] {
+                @include m.boton(v.$navy, v.$blanco);
+            }
+            &.remember{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                label{
+                    min-width: 100%;
+                    text-align: right;
+                    margin: 0 auto;
+                    width: auto;
+                    input{
+                        margin: 0.2rem;
+                        padding: 0.2rem;
+                        height: 1rem;
+                        width: 1rem;
+                    }
+                }
+            }
+            &.submit{
+                a{
+                    text-align: center;
+                    margin: 0.5rem;
+                }
+                @include m.tablet{
+                    justify-content: space-between;
+                    align-items: center;
+                }
+            }
         }
     }
 }
